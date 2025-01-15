@@ -40,13 +40,13 @@ public class SocialMediaController {
     @Autowired
     private AccountService accountService;
 
-    /*
+    
     @GetMapping("/messages")
     public ResponseEntity<List<Message>> getMessages() {
         List<Message> messages = messageService.getAllMessages();
         return ResponseEntity.ok(messages);
     }
-    */
+    
 
     @GetMapping("/messages/{messageId}")
     public ResponseEntity<Message> getMessageById(@PathVariable int messageId) {
