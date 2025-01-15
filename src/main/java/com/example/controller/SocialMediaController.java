@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-
 public class SocialMediaController {
 
     @Autowired
@@ -40,14 +39,12 @@ public class SocialMediaController {
     @Autowired
     private AccountService accountService;
 
-    
     @GetMapping("/messages")
     public ResponseEntity<List<Message>> getMessages() {
         List<Message> messages = messageService.getAllMessages();
         return ResponseEntity.ok(messages);
     }
     
-
     @GetMapping("/messages/{messageId}")
     public ResponseEntity<Message> getMessageById(@PathVariable int messageId) {
         Message message = messageService.getMessageById(messageId);
@@ -78,15 +75,12 @@ public class SocialMediaController {
             return new ResponseEntity<>(rowsUpdated, HttpStatus.BAD_REQUEST);
         }
     }
-
     
     @GetMapping("/accounts/{accountId}/messages")
-    public ResponseEntity<List<Message>> getMessageByAccountId(@PathVariable int accountId) {
-        List<Message> messages = messageService.getMessageByAccountId(accountId);
+    public ResponseEntity<List<Message>> getMessagesByAccountId(@PathVariable int accountId) {
+        List<Message> messages = messageService.getMessageByUser(accountId);
         return ResponseEntity.ok(messages);
     }
-    
-
     
     @PostMapping("/messages")
     public ResponseEntity<Message> insertMessage(@RequestBody Message message) {
@@ -105,14 +99,11 @@ public class SocialMediaController {
         try {
             Account registerAccount = accountService.registerAccount(account);
             return new ResponseEntity<>(registerAccount, HttpStatus.OK);
-
         } catch ( Exception e) {
             if (e instanceof org.springframework.web.server.ResponseStatusException) {
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
-
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
         }
     }
 

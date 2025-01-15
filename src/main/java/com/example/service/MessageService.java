@@ -3,7 +3,6 @@ import com.example.entity.Message;
 import com.example.repository.AccountRepository;
 import com.example.repository.MessageRepository;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +57,10 @@ public class MessageService {
         return 0;    // Message not found
     }
     
-    
-    //get messge from user given accountId
-    public List<Message> getMessageByAccountId(int accountId) {
-        return messageRepository.findByAccountId(accountId);
+    //get messge from user given postedBy
+    public List<Message> getMessageByUser(int accountId) {
+        return messageRepository.findByPostedBy(accountId);
     }
-    
 
     //create new message
     public Message createMessage(Message message) {
@@ -73,7 +70,6 @@ public class MessageService {
         {
             return null;
         }
-
         
         Message saveMessage = messageRepository.save(message);
         return saveMessage;
